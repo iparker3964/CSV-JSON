@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0 (Jython 2.7.0 on java1.8.0_73)" generated="20170205 15:43:50.879">
+<suite source="C:\Users\Chelsea\Desktop\csv-json (2)\src\test\acceptancetest" name="Acceptancetest" id="s1">
+<suite source="C:\Users\Chelsea\Desktop\csv-json (2)\src\test\acceptancetest\CSV-JSONConversion.robot" name="CSV-JSONConversion" id="s1-s1">
+<test name="CSV to JSON to CSV Yields Original" id="s1-s1-t1">
+<kw library="OperatingSystem" name="Get File">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>src/test/resources/grades.csv</arg>
+</arguments>
+<assign>
+<var>${contents}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.011">${contents} = "ID","Total","Assignment 1","Assignment 2","Exam 1"
+"111278","611","146","128","337"
+"111352","867","227","228","412"
+"111373","461","96","90","275"
+"111305","835","220","217","398"
+"111399","898","22...</msg>
+<status endtime="20170205 15:43:53.015" starttime="20170205 15:43:52.981" status="PASS"></status>
+</kw>
+<kw library="keywords.ConverterKeywords" name="Convert To Json">
+<arguments>
+<arg>${contents}</arg>
+</arguments>
+<assign>
+<var>${json}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.067">${json} = {"rowHeaders":["111278","111352","111373","111305","111399","111160","111276","111241"],"data":[[611,146,128,337],[867,227,228,412],[461,96,90,275],[835,220,217,398],[898,226,229,443],[454,77,125,252]...</msg>
+<status endtime="20170205 15:43:53.074" starttime="20170205 15:43:53.023" status="PASS"></status>
+</kw>
+<kw library="keywords.ConverterKeywords" name="Convert To Csv">
+<arguments>
+<arg>${json}</arg>
+</arguments>
+<assign>
+<var>${csv}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.128">${csv} = "ID","Total","Assignment 1","Assignment 2","Exam 1"
+"111278","611","146","128","337"
+"111352","867","227","228","412"
+"111373","461","96","90","275"
+"111305","835","220","217","398"
+"111399","898","22...</msg>
+<status endtime="20170205 15:43:53.131" starttime="20170205 15:43:53.081" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${contents}</arg>
+<arg>${csv}</arg>
+</arguments>
+<status endtime="20170205 15:43:53.214" starttime="20170205 15:43:53.141" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20170205 15:43:53.226" starttime="20170205 15:43:52.948" status="PASS"></status>
+</test>
+<test name="JSON to CSV to JSON Yields Original" id="s1-s1-t2">
+<kw library="OperatingSystem" name="Get File">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>src/test/resources/grades.json</arg>
+</arguments>
+<assign>
+<var>${contents}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.262">${contents} = {
+    "colHeaders":["Total","Assignment 1","Assignment 2","Exam 1"],
+    "rowHeaders":["111278","111352","111373","111305","111399","111160","111276","111241"],
+    "data":[[611,146,128,337],
+        ...</msg>
+<status endtime="20170205 15:43:53.264" starttime="20170205 15:43:53.250" status="PASS"></status>
+</kw>
+<kw library="keywords.ConverterKeywords" name="Convert To Csv">
+<arguments>
+<arg>${contents}</arg>
+</arguments>
+<assign>
+<var>${csv}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.278">${csv} = "ID","Total","Assignment 1","Assignment 2","Exam 1"
+"111278","611","146","128","337"
+"111352","867","227","228","412"
+"111373","461","96","90","275"
+"111305","835","220","217","398"
+"111399","898","22...</msg>
+<status endtime="20170205 15:43:53.280" starttime="20170205 15:43:53.267" status="PASS"></status>
+</kw>
+<kw library="keywords.ConverterKeywords" name="Convert To Json">
+<arguments>
+<arg>${csv}</arg>
+</arguments>
+<assign>
+<var>${json}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.281">${json} = {"rowHeaders":["111278","111352","111373","111305","111399","111160","111276","111241"],"data":[[611,146,128,337],[867,227,228,412],[461,96,90,275],[835,220,217,398],[898,226,229,443],[454,77,125,252]...</msg>
+<status endtime="20170205 15:43:53.297" starttime="20170205 15:43:53.281" status="PASS"></status>
+</kw>
+<kw library="keywords.ConverterKeywords" name="Json Strings Are Equal">
+<arguments>
+<arg>${contents}</arg>
+<arg>${json}</arg>
+</arguments>
+<assign>
+<var>${same}</var>
+</assign>
+<msg level="INFO" timestamp="20170205 15:43:53.313">${same} = True</msg>
+<status endtime="20170205 15:43:53.313" starttime="20170205 15:43:53.297" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be True">
+<doc>Fails if the given condition is not true.</doc>
+<arguments>
+<arg>${same}</arg>
+</arguments>
+<status endtime="20170205 15:43:53.359" starttime="20170205 15:43:53.328" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20170205 15:43:53.377" starttime="20170205 15:43:53.239" status="PASS"></status>
+</test>
+<status endtime="20170205 15:43:53.397" starttime="20170205 15:43:52.163" status="PASS"></status>
+</suite>
+<status endtime="20170205 15:43:53.524" starttime="20170205 15:43:50.930" status="PASS"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" name="Acceptancetest" id="s1">Acceptancetest</stat>
+<stat pass="2" fail="0" name="CSV-JSONConversion" id="s1-s1">Acceptancetest.CSV-JSONConversion</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
